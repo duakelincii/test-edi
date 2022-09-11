@@ -17,6 +17,7 @@
                                         <th>Posisi Yang Dilamar</th>
                                         <th>Pendidikan Terakhir</th>
                                         <th>Nama Universitas</th>
+                                        <th>Photo</th>
                                         <th>Action</th>
                                     </tr>
                                 </thead>
@@ -28,6 +29,7 @@
                                         <td>{{$data->position}}</td>
                                         <td>{{$data->pendidikandata->pendidikan->nama}}</td>
                                         <td>{{$data->pendidikandata->nama_pendidikan}}</td>
+                                        <td><img src="{{asset('profile')}}/{{$data->pic_profile}}" width="100px"></td>
                                         <td>
                                             <a class="btn btn-secondary btn-sm" href="{{route('pdf',$data->id)}}" target="_blank">PDF</a>
                                             <a href="javascript:;" data-toggle="modal" onclick="deleteData({{$data->id}})" data-target="#DeleteModal" class="btn btn-circle btn-danger btn-sm">Delete</a>

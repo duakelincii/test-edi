@@ -45,7 +45,7 @@ class EntryControllers extends Controller
         try {
             $image = $request->pic_profile;
             $imageName = time() . '.' . $image->extension();
-            $image->move(public_path('rental'), $imageName);
+            $image->move(public_path('profile'), $imageName);
             $entry = Entrydata::create([
                 'name' => $request->name,
                 'nik' => $request->nik,
