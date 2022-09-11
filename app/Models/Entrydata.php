@@ -4,14 +4,17 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class Entrydata extends Model
 {
     use HasFactory;
     protected $table = 'entrydata';
+
     protected $fillable = [
                             'id',
-                            'nama',
+                            'name',
+                            'position',
                             'nik',
                             'birthday',
                             'jk',
@@ -20,26 +23,36 @@ class Entrydata extends Model
                             'goldar',
                             'ex_salary',
                             'emergency_call',
-                            'pic_profile'
+                            'pic_profile',
+                            'user_id',
+                            'penempatan',
                         ];
     protected $dates = ['birthday'];
 
-    //relasi data pendidikan
-    public function pendidikan()
+    public function alamat()
     {
-        $this->belongsToMany(Pendidikan::class,'pendidikan_data','id_entry','id_pendidikan')->withTimestamps();
+        return $this->hasOne(Alamat::class,'id_entry');
     }
 
-    //relasi data pekerjaan terakhir
-    public function company()
+    public function user()
     {
-        $this->belongsTo(Historycompany::class,'id_entry');
+        return $this->BelongsTo(User::class,'user_id');
     }
 
-    //relasi nomor telpon
-    public function telpon()
+    public function phone()
     {
-        $this->hasOne(Telpon::class,'id_entry');
+        return $this->hasOne(Telpon::class,'id_entry');
     }
+
+    public function didikan()
+    {
+        return $this->hasOne(Pendidikan::class,PendidikanData::class,'id_entry','id_pendidikan')->latestOfMany();
+    }
+
+    public function pendidikandata()
+    {
+        return $this->belongsTo(PendidikanData::class,'id','id_entry');
+    }
+
 
 }

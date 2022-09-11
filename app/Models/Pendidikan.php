@@ -11,8 +11,4 @@ class Pendidikan extends Model
     protected $table = 'pendidikan';
     protected $fillable = ['nama'];
 
-    public function data()
-    {
-        $this->belongsToMany(Entrydata::class,'pendidikan_data','id_entry','id_pendidikan');
-    }
 }

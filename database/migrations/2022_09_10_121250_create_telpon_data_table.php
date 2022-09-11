@@ -14,7 +14,7 @@ class CreateTelponDataTable extends Migration
     public function up()
     {
         Schema::create('telpon_data', function (Blueprint $table) {
-            $table->unsignedBigInteger('id_entry')->index()->primary('id_entry');
+            $table->unsignedBigInteger('id_entry')->index();
             $table->string('nomor_telepon')->unique();
             $table->timestamps();
 

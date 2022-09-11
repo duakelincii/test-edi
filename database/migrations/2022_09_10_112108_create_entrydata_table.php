@@ -16,6 +16,7 @@ class CreateEntrydataTable extends Migration
         Schema::create('entrydata', function (Blueprint $table) {
             $table->id();
             $table->string('name');
+            $table->string('position');
             $table->string('nik')->unique();
             $table->date('birthday');
             $table->enum('jk',['Laki-Laki','Perempuan']);
@@ -25,7 +26,11 @@ class CreateEntrydataTable extends Migration
             $table->string('ex_salary');
             $table->string('emergency_call');
             $table->string('pic_profile');
+            $table->string('penempatan');
+            $table->unsignedBigInteger('user_id')->index();
             $table->timestamps();
+
+            $table->foreign('user_id')->references('id')->on('users')->onUpdate('cascade')->onDelete('cascade');
         });
     }
 

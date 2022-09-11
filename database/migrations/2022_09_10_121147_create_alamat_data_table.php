@@ -14,7 +14,7 @@ class CreateAlamatDataTable extends Migration
     public function up()
     {
         Schema::create('alamat_data', function (Blueprint $table) {
-            $table->unsignedBigInteger('id_entry')->index()->primary();
+            $table->unsignedBigInteger('id_entry')->index();
             $table->text('alamat_ktp');
             $table->text('alamat_dom');
             $table->timestamps();

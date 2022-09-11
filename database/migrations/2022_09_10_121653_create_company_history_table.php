@@ -14,7 +14,7 @@ class CreateCompanyHistoryTable extends Migration
     public function up()
     {
         Schema::create('company_history', function (Blueprint $table) {
-            $table->unsignedBigInteger('id_entry')->index()->primary('id_entry');
+            $table->unsignedBigInteger('id_entry')->index();
             $table->string('company_name');
             $table->string('last_position');
             $table->string('last_salary');

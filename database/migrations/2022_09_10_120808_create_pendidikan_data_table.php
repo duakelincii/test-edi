@@ -22,8 +22,6 @@ class CreatePendidikanDataTable extends Migration
             $table->string('nilai');
             $table->timestamps();
 
-            $table->primary(['id_entry','id_pendidikan']);
-
             $table->foreign('id_entry')->references('id')->on('entrydata')->onUpdate('cascade')->onDelete('cascade');
             $table->foreign('id_pendidikan')->references('id')->on('pendidikan')->onUpdate('cascade')->onDelete('cascade');
         });

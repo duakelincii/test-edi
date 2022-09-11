@@ -33,7 +33,17 @@
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <!-- Left Side Of Navbar -->
                     <ul class="navbar-nav me-auto">
-
+                        @if (Auth::check())
+                        @if (Auth::user()->isadmin == 1)
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ route('dashboard') }}">{{ __('Data Entry') }}</a>
+                        </li>
+                        @else
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ route('view') }}">{{ __('Data Entry') }}</a>
+                        </li>
+                        @endif
+                        @endif
                     </ul>
 
                     <!-- Right Side Of Navbar -->
@@ -75,9 +85,52 @@
             </div>
         </nav>
 
-        <main class="py-4">
+        @include('sweetalert::alert')
+
+
+
+        <!--Modal Konfirmasi Delete-->
+        <div id="DeleteModal" class="modal fade text-danger" role="dialog">
+            <div class="modal-dialog modal-dialog modal-dialog-centered ">
+              <!-- Modal content-->
+              <form action="" id="deleteform" method="post">
+                  <div class="modal-content">
+                      <div class="modal-header bg-danger">
+                          <h4 class="modal-title text-center text-white" >Konfirmasi Penghapusan</h4>
+                         <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                      </div>
+                      <div class="modal-body">
+                          {{ csrf_field() }}
+                          {{ method_field('DELETE') }}
+                          <p class="text-center">Apakah anda yakin untuk menghapus? Data yang sudah dihapus tidak bisa kembali</p>
+                      </div>
+                      <div class="modal-footer">
+                          <center>
+                              <button type="button" class="btn btn-success" data-dismiss="modal">Tidak, Batal</button>
+                              <button type="button" name="" class="btn btn-danger" data-dismiss="modal" onclick="formSubmit()">Ya, Hapus</button>
+                          </center>
+                      </div>
+                  </div>
+              </form>
+            </div>
+           </div>
+         <!--End Modal-->
+
+         <main class="py-4">
             @yield('content')
         </main>
     </div>
+
+    <script src="{{ URL::asset('assets/vendor/jquery/jquery.min.js') }}"></script>
+    <script src="{{ URL::asset('assets/vendor/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
+    <script src="{{ URL::asset('assets/vendor/jquery-easing/jquery.easing.min.js') }}"></script>
+
+    <!-- Page level plugins -->
+    <script src="{{ URL::asset('assets/vendor/datatables/jquery.dataTables.min.js') }}"></script>
+    <script src="{{ URL::asset('assets/vendor/datatables/dataTables.bootstrap4.min.js') }}"></script>
+
+    <!-- Page level custom scripts -->
+    <script src="{{ URL::asset('assets/js/demo/datatables-demo.js') }}"></script>
+    @yield('script')
 </body>
 </html>
