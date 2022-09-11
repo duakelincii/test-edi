@@ -28,7 +28,7 @@ class DatabaseSeeder extends Seeder
             'name' => 'Edi Indonesia',
             'email' => 'edi@gmail.com',
             'password' => Hash::make('password'),
-            'isadmin'   => 1,
+            'isadmin'   => 0,
             'created_at' => Carbon::now(),
         ]);
     }
